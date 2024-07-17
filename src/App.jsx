@@ -8,6 +8,7 @@ import API from './utils/API';
 import Cookies from 'js-cookie';
 import Signup from './pages/Signup';
 import Logout from './pages/Logout';
+import Home from './pages/Home';
 
 function App() {
   const [userId, setUserId] = useState(0);
@@ -44,19 +45,19 @@ function App() {
     
       
   };
-  
 
   const logout = () => {
     setToken("");
     setUserId(0);
-    localStorage.removeItem("token")
+    Cookies.remove("jwt")
   }
 
   return (
     <>
     <Router>
-      <NavbarDefault/>
+      <NavbarDefault handleSubmit={logout} userId={userId}/>
         <Routes>
+          <Route path="/" element={<Home userId={userId}/>}/>
           <Route path="/login" element={
             <Login
               type="Login"

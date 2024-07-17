@@ -27,7 +27,7 @@ const API = {
     checkToken: (token) => {
         const tokenInfo = axios.get(`${URL_PREFIX}/api/user`, {
             headers: {
-                "Cookie" : token
+                "Authorization" : `${token}`
             }
         })
         const dataTokenInfo = tokenInfo.then((res) => res.data)
