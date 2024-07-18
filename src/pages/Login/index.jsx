@@ -35,13 +35,13 @@ export default function Login(props) {
       <>
         <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-800">
+            <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-800 drop-shadow-md">
               Sign in to your account
             </h2>
           </div>
   
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px] ">
-            <div className="bg-neutral-100 px-6 py-12 shadow sm:rounded-lg sm:px-12 bg-white/75 rounded-lg">
+          <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-[480px] ">
+            <div className="bg-neutral-100 px-6 py-12 shadow sm:rounded-lg sm:px-12 bg-white/75 sm:rounded-lg">
               <form className="space-y-6" action="#" method="POST" onSubmit={submitHandler}>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
@@ -65,6 +65,7 @@ export default function Login(props) {
                   <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                     Password
                   </label>
+                  {props.message? (<div className='text-red-800 text-sm'>{props.message}</div>):(<></>)}
                   <div className="mt-2">
                     <input
                       id="password"
@@ -164,7 +165,7 @@ export default function Login(props) {
   
             <p className="mt-10 text-center text-sm text-gray-900">
               Not a member?{' '}
-              <Link to="/register" className="font-semibold leading-6 text-gray-900 hover:text-[#D48C70]">
+              <Link to="/signup" className="font-semibold leading-6 text-gray-900 hover:text-[#D48C70]">
                 Sign up!
               </Link>
             </p>

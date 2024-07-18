@@ -2,17 +2,20 @@
 import './App.css'
 import { NavbarDefault } from './components/Nav'
 import React, { useEffect, useState } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes, useNavigate } from "react-router-dom";
 import Login from './pages/Login';
 import API from './utils/API';
 import Cookies from 'js-cookie';
 import Signup from './pages/Signup';
 import Logout from './pages/Logout';
 import Home from './pages/Home';
+import Feed from './pages/Feed';
 
 function App() {
   const [userId, setUserId] = useState(0);
   const [token, setToken] = useState("");
+  const [loginErrorMessage, setLoginErrorMessage] = useState('')
+  const [signUpErrorMessage, setSignUpErrorMessage] = useState('')
   
   useEffect(() => {
     const savedToken = Cookies.get("jwt");
@@ -30,10 +33,16 @@ function App() {
 
   const handleSignup = (obj) => {
     API.signup(obj).then((data) => {
-      setToken(data.token);
-      setUserId(data.user.id);
-      localStorage.setItem("token", data.token);
-    });
+      if (data.jwt) {  
+        setToken(data.jwt);
+        setUserId(data.id);
+        Cookies.set("jwt", data.jwt);
+        setSignUpErrorMessage('')
+      } 
+    }).catch((err) => {
+      console.log(err.response.data.detail)
+      setSignUpErrorMessage(err.response.data.detail)
+    })
   };
 
   const handleLogin = (obj) => {
@@ -41,6 +50,10 @@ function App() {
       setToken(data.jwt);
       setUserId(data.id);
       Cookies.set("jwt", data.jwt);
+      setLoginErrorMessage('')
+    }).catch((err) => {
+      console.log(err.response.data.detail)
+      setLoginErrorMessage(err.response.data.detail)
     })
     
       
@@ -63,6 +76,7 @@ function App() {
               type="Login"
               handleSubmit={handleLogin}
               userId={userId}
+              message={loginErrorMessage}
             />
           } />
           <Route
@@ -72,6 +86,7 @@ function App() {
                   type="Signup"
                   handleSubmit={handleSignup}
                   userId={userId}
+                  message={signUpErrorMessage}
                 />
               }
             />
@@ -79,7 +94,7 @@ function App() {
               path="/logout"
               element={<Logout handleSubmit={logout} userId={userId} />}
             />
-
+          <Route path="/feed" element={<Feed userId={userId}/>}/>
         </Routes>
     </Router>
     </>
