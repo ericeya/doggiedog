@@ -1,11 +1,14 @@
 import { Typography } from "@material-tailwind/react";
 import './style.css'
 import { FaBookmark, FaRegHeart, FaHeart } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import API from "../../utils/API";
  
 export default function ImgWithCaption() {
     const [like, setLike] = useState(false)
     const [bookmark, setBookmark] = useState(false)
+    const [imageList, setImageList] = useState([])
+
     const likeHandler = () => {
         if (like) {
             setLike(false)
@@ -21,18 +24,26 @@ export default function ImgWithCaption() {
         }
     }
 
+    useEffect(() => {
+        API.getImage().then((data) => {
+            setImageList(data)
+            console.log(imageList)
+        })
+    }, [like])
+
     return (
     <div className="container mx-auto">
 
         <div className="p-5 flex justify-center flex-col items-center ">
-
-            <figure className="w-[50%] p-[1rem] rounded-lg figure-card mb-4">
+            {imageList.map((data) => {
+                return <>
+                <figure key={data.id} className="w-[50%] p-[1rem] rounded-lg figure-card mb-4">
                 <Typography variant="small" className="mt-2 text-left text-[1.5rem] lilita-one-regular" color="brown" textGradient>
-                    @eric
+                    @{data.username}
                 </Typography>
                 <img
                     className="h-96 w-full rounded-md object-cover object-center"
-                    src="https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"
+                    src={data.image}
                     alt="nature image"
                     />
                 <div className="flex flex-row justify-between">
@@ -57,9 +68,13 @@ export default function ImgWithCaption() {
                     )}
                 </div>
                     <Typography variant="small" className="mt-2 text-left text-[1.2rem] handlee-regular">
-                        Having fun at the beach!
+                        {data.caption}
                     </Typography>
             </figure>
+                </>
+            })}
+
+            
             
         </div>
     </div>

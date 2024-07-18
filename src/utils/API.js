@@ -30,7 +30,13 @@ const API = {
         return dataTokenInfo
     },
 
-    
+    getImage: () => {
+        const imageList = axios.get(`${URL_PREFIX}/api/imagelist`)
+        const dataImageList = imageList.then((res) => res.data)
+        return dataImageList
+    }
+
+
 
     
 }
