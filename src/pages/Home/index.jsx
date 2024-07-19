@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
+/* eslint-disable react/prop-types */
 import './style.css'
 import { DefaultGallery } from '../../components/Gallery'
-import API from '../../utils/API'
 
 export default function Home({imageList}) {
   console.log(imageList)

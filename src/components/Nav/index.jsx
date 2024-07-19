@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Navbar, MobileNav, Collapse, Typography, Button, IconButton, } from "@material-tailwind/react";
+import { Navbar, Collapse, Typography, Button, IconButton, } from "@material-tailwind/react";
 import { Link } from "react-router-dom"; 
 import { FaBookmark, FaDog, FaSearch, FaUser } from "react-icons/fa";
 

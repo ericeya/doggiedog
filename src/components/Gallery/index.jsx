@@ -1,4 +1,4 @@
-// import { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
 
 export function DefaultGallery({imageList}) {
     let data = []

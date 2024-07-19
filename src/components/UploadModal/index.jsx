@@ -7,9 +7,8 @@ import {
     DialogBody,
 } from "@material-tailwind/react";
 import API from "../../utils/API";
-import axios from "axios";
 
-export function DialogDefault({onUploadImage, token}) {
+export function DialogDefault({token}) {
     const [open, setOpen] = useState(false);
     const [image, setImage] = useState(null)
     const [caption, setCaption] = useState('')
