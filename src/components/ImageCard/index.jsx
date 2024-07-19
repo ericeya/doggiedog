@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react'
-import API from '../../utils/API'
+import { useState } from 'react'
+// import API from '../../utils/API'
 import { Typography } from "@material-tailwind/react";
 import './style.css'
 import { FaBookmark, FaRegHeart, FaHeart } from "react-icons/fa";
@@ -71,6 +71,7 @@ export default function ImageCard(props) {
                     {props.imageCap}
                 </Typography>
             </figure>
+            
         </>
     )
 }

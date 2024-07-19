@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import './style.css'
 import { useEffect, useState } from "react";
 import API from "../../utils/API";
 import ImageCard from "../../components/ImageCard";
+// import './style.css'
  
 export default function ImgWithCaption(props) {
     const [imageList, setImageList] = useState([])

@@ -31,14 +31,15 @@ function App() {
           Cookies.remove("jwt");
         }
       })
-      .then(() => {
-        API.getImage().then(async (data)=> {
-          // console.log(data)
-          await setImageList(data)
-        })
-      })
     }
   }, [token]);
+
+  useEffect(()=> {
+    API.getImage().then(async (data)=> {
+      // console.log(data)
+      await setImageList(data)
+    })
+  },[])
  
 
   const handleSignup = (obj) => {
