@@ -34,7 +34,25 @@ const API = {
         const imageList = axios.get(`${URL_PREFIX}/api/imagelist`)
         const dataImageList = imageList.then((res) => res.data)
         return dataImageList
+    },
+
+    getUserImages: (id) => {
+        const imageList = axios.get(`${URL_PREFIX}/api/userimages`)
+        const dataImageList = imageList.then((res) => res.data)
+        return dataImageList
+    },
+
+    uploadImage: (formData, token) => {
+        const uploadImage = axios.post(`${URL_PREFIX}/api/upload`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `${token}`
+            },
+        })
+        const dataUploadImage = uploadImage.then((res) => res.data)
+        return dataUploadImage
     }
+
 
 
 

@@ -99,7 +99,7 @@ export function NavbarDefault(props) {
             <Link to="/logout">
               <Button variant="gradient"
             size="sm"
-            className="hidden lg:inline-block">
+            className="hidden lg:inline-block" color="blue-gray">
                <span>Logout</span>
               </Button>
             </Link>
@@ -177,7 +177,7 @@ export function NavbarDefault(props) {
           {props.userId ? (
             <>
             <Link to="/logout">
-            <Button fullWidth variant="gradient" size="sm" className="w-full mb-2">
+            <Button fullWidth variant="gradient" size="sm" className="w-full mb-2" color="blue-gray">
               <span>Logout</span>
             </Button>
             </Link>

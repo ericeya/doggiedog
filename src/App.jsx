@@ -2,7 +2,7 @@
 import './App.css'
 import { NavbarDefault } from './components/Nav'
 import React, { useEffect, useState } from "react";
-import { Route, BrowserRouter as Router, Routes, useNavigate } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Login from './pages/Login';
 import API from './utils/API';
 import Cookies from 'js-cookie';
@@ -10,26 +10,36 @@ import Signup from './pages/Signup';
 import Logout from './pages/Logout';
 import Home from './pages/Home';
 import Feed from './pages/Feed';
+import Profile from './pages/Profile';
 
 function App() {
   const [userId, setUserId] = useState(0);
   const [token, setToken] = useState("");
   const [loginErrorMessage, setLoginErrorMessage] = useState('')
   const [signUpErrorMessage, setSignUpErrorMessage] = useState('')
+  const [imageList, setImageList] = useState({})
+
   
   useEffect(() => {
     const savedToken = Cookies.get("jwt");
     if (savedToken) {
-      API.checkToken(savedToken).then((data) => {
+      API.checkToken(savedToken).then(async (data) => {
         if (data.id) {
-          setToken(savedToken);
-          setUserId(data.id);
+          await setToken(savedToken);
+          await setUserId(data.id);
         } else {
           Cookies.remove("jwt");
         }
-      });
+      })
+      .then(() => {
+        API.getImage().then(async (data)=> {
+          // console.log(data)
+          await setImageList(data)
+        })
+      })
     }
-  }, []);
+  }, [token]);
+ 
 
   const handleSignup = (obj) => {
     API.signup(obj).then((data) => {
@@ -70,7 +80,7 @@ function App() {
     <Router>
       <NavbarDefault handleSubmit={logout} userId={userId}/>
         <Routes>
-          <Route path="/" element={<Home userId={userId}/>}/>
+          <Route path="/" element={<Home userId={userId} imageList={imageList}/>}/>
           <Route path="/login" element={
             <Login
               type="Login"
@@ -95,6 +105,7 @@ function App() {
               element={<Logout handleSubmit={logout} userId={userId} />}
             />
           <Route path="/feed" element={<Feed userId={userId}/>}/>
+          <Route path="/account" element={<Profile userId={userId} token={token} imageList={imageList}/>}/>
         </Routes>
     </Router>
     </>
