@@ -191,7 +191,7 @@ export function NavbarDefault(props) {
             </Link>
 
             <Link to="/signup">
-              <Button fullWidth variant="gradient" size="sm" className="w-full mb-2 ml-2" color="deep-orange">
+              <Button fullWidth variant="gradient" size="sm" className="w-full mb-4 mx-auto" color="deep-orange">
                 <span>Create Account</span>
               </Button>
             </Link>

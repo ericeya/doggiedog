@@ -37,7 +37,7 @@ export default function ImageCard(props) {
 
     return (
         <>
-            <figure className="w-[50%] p-[1rem] rounded-lg figure-card mb-4">
+            <figure className="w-full lg:w-[50%] p-[1rem] rounded-lg figure-card mb-4">
                 <Typography variant="small" className="mt-2 text-left text-[1.5rem] lilita-one-regular" color="brown" textGradient>
                     @{props.username}
                 </Typography>

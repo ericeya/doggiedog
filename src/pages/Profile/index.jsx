@@ -36,15 +36,15 @@ export default function Profile(props) {
 
                     <div className="handlee-regular text-[2rem] mt-3 text-center">Hello, {userData.username}!</div>
 
-                    <div className="handlee-regular text-[1.5rem] mt-2 text-center">
+                    <div className="handlee-regular text-[1.5rem] md:mt-2 mt-5 text-center">
                         What is your pet&apos;s name? <Button variant="gradient" color="brown">Enter</Button>
                     </div>
 
-                    <div className="handlee-regular text-[1.5rem] mt-5 text-right absolute top-0 right-20 mr-2">
+                    <div className="handlee-regular text-[1.5rem] mt-5 text-right md:absolute md:top-0 md:right-20 absolute top-0 right-0 mr-2">
                         <DialogDefault userId={props.userId} token={props.token} />
                     </div>
 
-                    <div className="w-[85%] mx-auto mt-4">
+                    <div className="w-full md:w-[85%] mx-auto mt-4">
                         <DefaultGallery imageList={imageData} />
                     </div>
                 </div>
